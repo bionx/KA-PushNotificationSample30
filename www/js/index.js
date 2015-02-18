@@ -20,7 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
-        document.getElementById("regResponse").value = "initialize";
+//        document.getElementById("regResponse").value = "initialize";
     },
     // Bind Event Listeners
     //
@@ -28,23 +28,25 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.getElementById("regResponse").value = "bindEvents";
+//        document.getElementById("regResponse").value = "bindEvents";
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+            alert('onDeviceReady');
         app.receivedEvent('deviceready');
-        document.getElementById("regResponse").value = "onDeviceReady";
+//        document.getElementById("regResponse").value = "onDeviceReady";
         var pushNotification = window.plugins.pushNotification;
         pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"352321724140","ecb":"app.onNotificationGCM"});
+
 
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         
-        document.getElementById("regResponse").value = "receivedEvent:" + id;
+//        document.getElementById("regResponse").value = "receivedEvent:" + id;
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -57,14 +59,14 @@ var app = {
     // result contains any message sent from the plugin call
     successHandler: function(result) {
         alert('Callback Success! Result = '+result);
-        document.getElementById("regResponse").value = "successHandler:" + result;
+//        document.getElementById("regResponse").value = "successHandler:" + result;
     },
     errorHandler:function(error) {
-        document.getElementById("regResponse").value = "errorHandler:" + error;
-        alert(error);
+//        document.getElementById("regResponse").value = "errorHandler:" + error;
+        alert('Error:' + error);
     },
     onNotificationGCM: function(e) {
-        document.getElementById("regResponse").value = "onNotificationGCM:" + e.regid;
+//        document.getElementById("regResponse").value = "onNotificationGCM:" + e.regid;
         switch( e.event )
         {
             case 'registered':
@@ -72,20 +74,20 @@ var app = {
                 {
                     console.log("Regid " + e.regid);
                     alert('registration id = '+e.regid);
-                    document.getElementById("regResponse").value = e.regid;
+//                    document.getElementById("regResponse").value = e.regid;
                     
                 }
                 break;
 
             case 'message':
                 // this is the actual push notification. its format depends on the data model from the push server
-                document.getElementById("message").value = e.msgcnt;
+//                document.getElementById("message").value = e.msgcnt;
                 alert('message = '+e.message+' msgcnt = '+e.msgcnt);
                 break;
 
             case 'error':
                 alert('GCM error = '+e.msg);
-                document.getElementById("error").value = "onNotificationGCM:" + "GCM error = "+e.msg;
+//                document.getElementById("error").value = "onNotificationGCM:" + "GCM error = "+e.msg;
                 break;
 
             default:
